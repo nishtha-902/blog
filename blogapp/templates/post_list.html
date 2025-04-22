@@ -1,0 +1,299 @@
+<!-- blog/templates/blog/post_list.html -->
+<!-- {% load static %} -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - All Posts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0px;
+            padding-left: 50px;
+            padding-right: 50px;
+            padding: 300;
+            background-color: #fdfaf5;
+        }
+
+        header {
+
+            color: black;
+            padding: 0px 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .post-header {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .post-header h1 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 5px;
+        }
+
+        .post-header p {
+            font-size: 18px;
+            color: #555;
+            margin: 0;
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .author-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .author-info a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .author-info span {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .post-detail {
+            background-color: #fdfaf5;
+            padding: 20px;
+            border-radius: 8px;
+            /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+        }
+
+        .post-detail img {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .post-detail p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: #fdfaf5;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            margin: 10px 15px;
+            font-size: 20px;
+        }
+
+        .navbar .cta {
+            background: black;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .blog-post {
+            margin-bottom: 20px;
+            padding: 20px;
+            width: 55vw;
+            border-bottom: 1px solid grey;
+            /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+        }
+
+        .blog-post h2 {
+            margin-top: 0;
+            font-size: 28px;
+            color: #333;
+        }
+
+        .blog-post p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .read-more {
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        .signout {
+            background: black;
+            color: white;
+            height: 27px;
+            border-radius: 15px;
+            width: 100px;
+        }
+
+        .signout a {
+            text-decoration: none;
+            color: white;
+            font-size: large;
+            font-weight: 100;
+            margin: 15px;
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    {% csrf_token %}
+    {% if user %}
+    <nav class="navbar">
+        <div class="logo"><strong>MindSET Matters</strong></div>
+        <div>
+            <a href="{% url 'question_list' %}" class="create-post-button">Home</a>
+            <a href="/postlist/" class="create-post-button">Blog</a>
+            <a href="{% url 'create_post' %}" class="create-post-button">Write Blog</a>
+            <a href="/ask/">Ask Question</a>
+
+        </div>
+        </div>
+        {% if user.is_authenticated %}
+    <div>
+        <a href="{% url 'user_profile' user.id %}">
+            <!-- <img src="{{ user_data.profile_image.url }}" alt="Profile Image" style="width: 150px; height: 150px; border-radius: 50%;"> -->
+            <strong>{{ user.username|first }}</strong>
+        </a><br>
+    </div>
+    {% endif %}
+
+    </nav>
+    <header>
+        <p>The place where thoughts become movements.</p>
+    </header>
+
+    <!-- <form method="get" class="mb-6">
+        <label for="category" class="font-semibold text-lg">Filter by Category:</label>
+        <select name="category" id="category" onchange="this.form.submit()"
+            class="ml-2 px-4 py-2 border border-gray-300 rounded">
+            <option value="">All Categories</option>
+            {% for category in categories %}
+            <option value="{{ category.id }}" {% if selected_category_id == category.id %}selected{% endif %}>
+                {{ category.name }}
+            </option>
+            {% endfor %}
+        </select>
+    </form> -->
+
+    <!-- we can change this code in  -->
+
+    <div class="mb-6">
+        <span class="font-semibold text-lg">Filter by Category:</span>
+        <div class="flex flex-wrap gap-3 mt-2">
+            <a href="{% url 'post_list' %}"
+                class="px-4 py-2 rounded-full border {% if not selected_category_id %}bg-black text-white{% else %}bg-gray-100{% endif %}">
+                All
+            </a>
+
+            {% for category in categories %}
+            <a href="{% url 'post_list' %}?category={{ category.id }}"
+                class="px-4 py-2 rounded-full border 
+                   {% if selected_category_id == category.id %}bg-black text-white{% else %}bg-gray-100{% endif %}"><br>
+                {{ category.name }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        {% for post in posts %}
+        <div class="post-header">
+            <h1>{{ post.title }}</h1>
+            <small>
+                {{ post.author.username }} | Posted on {{ post.created_at|date:"d-M-Y" }}
+                {% if post.category %}
+                | Category: {{ post.category.name }}
+                {% endif %}
+            </small>
+
+        </div>
+
+        <div class="post-detail">
+            <!-- <img src="{{ post.image_url }}" alt="Post Image"> -->
+            <div>
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="w-[20px] h-[400px] rounded-lg " /></a>
+            </div>
+            <p>{{ post.content|slice:":200" }}...</p>
+            <p><a href="{% url 'post_detail' post.pk %}" class="read-more">Read More</a></p>
+        </div>
+
+        {% empty %}
+        <p>No posts available.</p>
+        {% endfor %}
+        {% endif %}
+
+        
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 MindSET Matters. All rights reserved.</p>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <!-- user_profile.html -->
+    <h2>{{ profile_user.username }}'s Profile</h2>
+    <p>Email: {{ profile_user.email }}</p>
+
+    {% if user_data %}
+    <p>Age: {{ user_data.age }}</p>
+    <p>Qualification: {{ user_data.qualification }}</p>
+    {% else %}
+    <p>No additional profile information available.</p>
+    {% endif %}
+
+    <h2>Blogs</h2>
+    <ul>
+        {% for blog in blogs %}
+        <li>{{ blog.title }} - {{ blog.created_at }}</li>
+        {% empty %}
+        <li>No blogs posted.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Questions</h2>
+    <ul>
+        {% for question in questions %}
+        <li>{{ question.title }} - {{ question.created_at }}</li>
+        {% empty %}
+        <li>No questions posted.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Answers</h2>
+    <ul>
+        {% for answer in answers %}
+        <li>
+            <strong>{{ answer.question.title }}</strong><br>
+            <small>{{ answer.created_at }}</small><br>
+            {{ answer.body }} 
+        </li>
+        {% empty %}
+        <li>No answers posted.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'post_list' %}">Back to Posts</a>
+
+    <div class="signout">
+        <h4><a href="/">Sign out</a></h4>
+    </div>
+
+</body>
+
+</html>
