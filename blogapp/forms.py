@@ -8,7 +8,6 @@ class PostForm(forms.ModelForm):
         fields = ['title', 'content','image','category']
 
 
-
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category

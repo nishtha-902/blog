@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MindSET Matters - Homepage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0 0px;
+            background-color: #f0efed;
+        }
+
+        .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top:0px;
+        z-index: 1000;
+        padding: 20px 50px;
+        background: linear-gradient(to right, #185a9d, #67c7f0);
+        /* background: linear-gradient(to right, #34aae9, #0072ff); */
+    }
+
+    .navbar a {
+        text-decoration: none;
+        color: white;
+        margin: 10px 15px;
+        font-size: 20px;
+        font-weight: 500;
+        padding-bottom: 5px;
+    }
+
+    .navbar .navlinks a:hover{
+        border-bottom: 3px solid white;
+    }
+
+    .navbar .cta {
+        background: black;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+    }
+
+    .userprofilelogo{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
+        border: 3px solid rgb(91, 89, 89);
+        text-transform: uppercase;
+    }
+
+    .userprofilelogo a{
+        margin-top: 18px;
+        color: #000;
+    }
+
+        .main-content {
+        display: flex;
+        padding: 20px;
+        gap: 20px;
+        }
+
+        .left-card {
+        position: relative;
+        width: 65%;
+        height: 80%;
+        }
+
+        .left-card img {
+        width: 100%;
+        height: 90%;
+        }
+
+        .right-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 35%;
+        }
+
+        .right-card {
+        position: relative;
+        }
+
+        .right-card img {
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+        }
+
+        .right-cards .overlay {
+        position: absolute;
+        bottom: 10px;
+        left: 15px;
+        color: white;
+        text-shadow: 1px 1px 5px black;
+        }
+
+        .left-card .overlay {
+        position: absolute;
+        bottom: 70px;
+        left: 15px;
+        color: white;
+        text-shadow: 1px 1px 5px black;
+        }
+
+        .overlay h2,
+        .overlay h3 {
+        color: white;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hero{
+            padding: 0px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ques .question-section{
+            max-width: 64%;
+            flex: 0 0 64%;
+        }
+
+        .ques .ads{
+            max-width: 30%;
+            flex: 0 0 30%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .post-header, .question-section {
+            margin-bottom: 30px;
+        }
+
+        .post-header h1, .question-section h2 {
+            font-size: 32px;
+            color: #000;
+            margin-bottom: 10px;
+        }
+
+        .post{
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-post {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .post-detail img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .post-detail p, .blog-post p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .read-more {
+            color: #085fbc;
+            text-decoration: none;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        .read-more:hover {
+            color: #063c75;
+        }
+
+        .footer {
+        background: linear-gradient(to right, #185a9d, #67c7f0);
+        color: white;
+        padding: 40px 80px;
+        }
+
+        .footer-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        margin: auto;
+        gap: 20px;
+        }
+
+        .footer-logo h2 {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        }
+
+        .footer-icons i {
+        font-size: 18px;
+        margin-right: 15px;
+        cursor: pointer;
+        transition: color 0.3s ease;
+        }
+
+        .footer-icons i:hover {
+        color: #1c4898;
+        }
+
+        .footer-links h4 {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        }
+
+        .footer-links ul {
+        list-style: none;
+        padding: 0;
+        }
+
+        .footer-links ul li {
+        margin: 6px 0;
+        }
+
+        .footer-links ul li a {
+        text-decoration: none;
+        color: white;
+        transition: color 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+        color: #89a3dc;
+        
+        }
+
+        .grad{
+            background: linear-gradient(to right, #185a9d, #67c7f0);
+        }
+
+
+        /* .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 50px;
+        } */
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="{% url 'homepage' %}"><strong>MindSET Matters</strong></a></div>
+        <div class="navlinks">
+            <a href="{% url 'homepage' %}" class="create-post-button">Home</a>
+            <a href="{% url 'question_list' %}" class="create-post-button">FAQ</a>
+            <a href="{% url 'post_list' %}" class="create-post-button">Blog</a>
+            <a href="{% url 'create_post' %}" class="create-post-button">Write Blog</a>
+            <a href="/ask/">Ask Question</a>
+        </div>
+
+        <div class="userprofilelogo">
+          <a href="{% url 'user_profile' user.id %}">
+              <!-- <img src="{{ user_data.profile_image.url }}" alt="Profile Image" style="width: 150px; height: 150px; border-radius: 50%;"> -->
+              <strong>{{ user.username|first }}</strong>
+          </a><br>
+      </div>
+      </nav>
+
+    <!-- <header>
+        <p>The place where thoughts become movements.</p>
+    </header> -->
+    <main>
+        <div class="main-content m-8">
+          <div class="left-card h-[425px]">
+            <img src="https://images.unsplash.com/photo-1616156027751-fc9a850fdc9b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTI0fHxkaWdpdGFsJTIwbWFya2V0aW5nfGVufDB8fDB8fHww" alt="Oracle Fusion" />
+            <!-- https://images.unsplash.com/photo-1579179858018-6921d9c5f669?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTJ8fHRlY2huaWNhbCUyMGJsb2d8ZW58MHx8MHx8fDA%3D -->
+            <div class="overlay">
+              <h2>Digital Marketing Strategies for Startups – Step by Step</h2>
+              <p>Featured • 4 hours ago</p>
+            </div>
+          </div>
+    
+          <div class="right-cards">
+            <div class="right-card h-[180px]">
+              <img src="https://images.unsplash.com/photo-1564931768730-7e4d8e240044?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHZzJTIwY29kZXxlbnwwfHwwfHx8MA%3D%3D" alt="Oracle Fusion" />
+              <div class="overlay">
+                <h3>VS Code Shortcuts That Save Hours</h3>
+                <p>News • 6 hours ago</p>
+              </div>
+            </div>
+            <div class="right-card h-[180px]">
+              <img src="https://media.istockphoto.com/id/1344939844/photo/hand-holding-drawing-virtual-lightbulb-with-brain-on-bokeh-background-for-creative-and-smart.webp?a=1&b=1&s=612x612&w=0&k=20&c=Q1LGFdFoZQ0YRWTcHtSZpvfJ_DtgD86aMMuUYxPtz8s=" alt="Oracle Fusion" />
+              <div class="overlay">
+                <h3>Explained: Cloud Computing for Beginners</h3>
+                <p>Story • 8 hours ago</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+   
+
+    <div class="container ques px-16">
+        <div class="question-section">
+            <h2 class="font-semibold">Top Questions</h2>
+            {% for question in questions %}
+                <div class="blog-post border-2 border-blue-600 hover:shadow-xl">
+                    <h3 class="font-semibold text-lg">{{ question.title }}</h3>
+                    <p class="border-b-2 border-blue-200 pb-4 mb-2"><small>{{ question.author.username }} | Posted on {{ question.created_at|date:"d-M-Y" }}</small></p>
+                    <a href="{% url 'question_detail' question.pk %}" class="read-more">View Answer</a>
+                </div>
+            {% empty %}
+                <p>No questions found.</p>
+            {% endfor %}
+            <div class="grad mt-2 h-[45px] w-[100px] absolute rounded-3xl">
+                <button class="h-[36px] w-[91px] relative bottom-5 left-1 bg-white rounded-3xl text-xl text-black font-semibold mt-6"><a href="{% url 'question_list' %}">Next</a></button>
+            </div>
+        </div>
+
+        <div class="ads">
+
+        </div>
+    </div>
+    
+    <!-- <div class="news">
+        
+    </div> -->
+
+    <div class="mt-32 mb-16 px-16">
+        <span class="text-3xl">Filter By Category</span>
+        <div class="flex flex-wrap gap-3 mt-4">
+            <a href="{% url 'post_list' %}"
+                class="py-3 px-8 rounded-3xl border {% if not selected_category_id %}grad text-white{% else %}bg-gray-300{% endif %}">
+                All
+            </a>
+
+            {% for category in categories %}
+            <a href="{% url 'post_list' %}?category={{ category.id }}"
+                class="py-3 px-8 rounded-full border hover:bg-gray-300 transition duration-300 ease-in-out
+                   {% if selected_category_id == category.id %}grad text-white{% else %}bg-gray-300{% endif %}">
+                {{ category.name }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="container flex flex-wrap gap-10 px-16">
+        {% for post in posts %}
+        <div class="post w-[48%] hover:shadow-2xl">
+            <div class="post-header">
+                <h1 class="capitalize">{{ post.title }}</h1>
+                <small>
+                    {{ post.author.username }} | Posted on {{ post.created_at|date:"d-M-Y" }}
+                    {% if post.category %}| Category: {{ post.category.name }}{% endif %} | Views: {{post.views_count}}
+                </small>
+            </div>
+
+            <div class="post-detail">
+                <img class="h-[250px]" src="{{ post.image.url }}" alt="{{ post.title }}">
+                <p class="mt-6">{{ post.content|slice:":200" }}...</p>
+                <p class="mt-3"><a href="{% url 'post_detail' post.pk %}" class="read-more">Read More</a></p>
+            </div>
+        </div>
+        {% empty %}
+            <p>No posts available.</p>
+        {% endfor %}
+    </div>
+    <div class="grad h-[45px] w-[100px] absolute rounded-3xl ml-16 mb-10">
+        <button class="h-[36px] w-[91px] relative bottom-5 left-1 bg-white text-xl rounded-3xl text-black font-semibold mt-6"><a href="{% url 'post_list' %}">Next</a></button>
+    </div>
+
+
+    <footer class="footer mt-32">
+        <div class="footer-container">
+          <div class="footer-logo">
+            <h2>MindSET Matters</h2>
+            <div class="footer-icons">
+              <i class="fa-brands fa-facebook-f"></i>
+              <i class="fa-brands fa-instagram"></i>
+              <i class="fa-brands fa-twitter"></i>
+              <i class="fa-brands fa-linkedin-in"></i>
+              <i class="fa-brands fa-youtube"></i>
+            </div>
+            <p class="mt-16">&copy; 2025 MindSET Matters. All rights reserved.</p>
+          </div>
+          <div class="footer-links flex flex-col justify-center text-center">
+            <h4>CUSTOMER SERVICE</h4>
+            <ul>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-links flex flex-col justify-center text-center">
+            <h4>CATEGORIES</h4>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">About Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-links flex flex-col justify-center text-center">
+            <h4>INFORMATION</h4>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">About Us</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+      
+
+    <!-- <div class="footer">
+        <p>&copy; 2025 MindSET Matters. All rights reserved.</p>
+    </div> -->
+</body>
+
+</html>

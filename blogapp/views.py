@@ -52,6 +52,10 @@ def post_list(request):
     else:
         posts = Post.objects.all()
 
+    for post in posts:
+        post.views_count+=1
+        post.save()
+        
     return render(request, 'post_list.html', {
         'posts': posts,
         'categories': categories,
@@ -61,6 +65,10 @@ def post_list(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
+
+    post.views_count +=1
+    post.save( update_fields=['views_count'])
+
     return render(request, 'post_details.html', {'post': post})
 
 def loginpage(request):
@@ -73,7 +81,8 @@ def loginpage(request):
         if user is not None:
             login(request, user)
             fname = user.first_name 
-            return redirect('question_list')
+            return redirect('homepage')
+        
         else:
             messages.error(request,"wrong passwords")
             return redirect('/')
@@ -105,7 +114,26 @@ def signout(request):
     return redirect('loginpage.html')
 
 def homepage(request):
-    return render(request, 'base.html')
+    category_id = request.GET.get('category')
+    categories = Category.objects.all()
+
+    if category_id:
+        posts = Post.objects.filter(category_id=category_id).order_by('-created_at')[:5]
+    else:
+        posts = Post.objects.all().order_by('-created_at')[:5]
+
+    for post in posts:
+        post.views_count +=1
+        post.save()
+
+    questions = Question.objects.all().order_by('-created_at')[:3]  # Latest 3 questions
+
+    return render(request, 'base.html', {
+        'posts': posts,
+        'categories': categories,
+        'selected_category_id': int(category_id) if category_id else None,
+        'questions': questions,  # pass to template
+    })
 
 def question_list(request):
     questions = Question.objects.all().order_by('-created_at')

@@ -9,14 +9,12 @@
     <title>Blog - All Posts</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0px;
-            padding-left: 50px;
-            padding-right: 50px;
-            padding: 300;
-            background-color: #fdfaf5;
+            background-color: #f0efed;
         }
 
         header {
@@ -80,7 +78,6 @@
         }
 
         .post-detail {
-            background-color: #fdfaf5;
             padding: 20px;
             border-radius: 8px;
             /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
@@ -106,61 +103,164 @@
 
         /* Navigation Bar */
         .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-            background: #fdfaf5;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top:0px;
+        z-index: 1000;
+        padding: 20px 50px;
+        background: linear-gradient(to right, #185a9d, #67c7f0);
+        /* background: linear-gradient(to right, #34aae9, #0072ff); */
+    }
+
+    .navbar a {
+        text-decoration: none;
+        color: white;
+        margin: 10px 15px;
+        font-size: 20px;
+        font-weight: 500;
+        padding-bottom: 5px;
+    }
+
+    .navbar .navlinks a:hover{
+        border-bottom: 3px solid white;
+    }
+
+    .navbar .cta {
+        background: black;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+    }
+
+    .userprofilelogo{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
+        border: 3px solid rgb(91, 89, 89);
+        text-transform: uppercase;
+    }
+
+    .userprofilelogo a{
+        margin-top: 18px;
+        color: #000;
+    }
+
+        .main-content {
+        display: flex;
+        padding: 20px;
+        gap: 20px;
         }
 
-        .navbar a {
-            text-decoration: none;
-            color: black;
-            margin: 10px 15px;
-            font-size: 20px;
+        .left-card {
+        position: relative;
+        width: 65%;
+        height: 80%;
         }
 
-        .navbar .cta {
-            background: black;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
+        .left-card img {
+        width: 100%;
+        height: 90%;
         }
+
+        .right-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 35%;
+        }
+
+        .right-card {
+        position: relative;
+        }
+
+        .right-card img {
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+        }
+
+        .right-cards .overlay {
+        position: absolute;
+        bottom: 10px;
+        left: 15px;
+        color: white;
+        text-shadow: 1px 1px 5px black;
+        }
+
+        .left-card .overlay {
+        position: absolute;
+        bottom: 70px;
+        left: 15px;
+        color: white;
+        text-shadow: 1px 1px 5px black;
+        }
+
+        .overlay h2,
+        .overlay h3 {
+        color: white;
+        }
+
 
         .container {
             max-width: 1200px;
             margin: 20px auto;
-            padding: 0 15px;
+            padding: 0 35px;
         }
 
-        .blog-post {
-            margin-bottom: 20px;
+        .post-container .post{
+            max-width: 65%;
+            flex:0 0 65%
+        }
+
+        .post{
             padding: 20px;
-            width: 55vw;
-            border-bottom: 1px solid grey;
-            /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+            margin-bottom: 20px;
+            margin-left: 10px;
         }
 
-        .blog-post h2 {
-            margin-top: 0;
-            font-size: 28px;
+        .date-box {
+            width: 60px;
+            padding: 7px 0;
+            margin-right: 10px;
+            background-color: #f0efed; /* light background */
+            text-align: center;
+        }
+
+        .date-line {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #00c6ff, #0072ff); /* blue gradient line */
+            margin-bottom: 8px;
+            border-radius: 5px;
+        }
+
+        .date-day {
+            font-size: 20px;
+            font-weight: bold;
             color: #333;
         }
 
-        .blog-post p {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #555;
+        .date-month-year {
+            font-size: 12px;
+            color: #666;
         }
 
+
         .read-more {
-            font-size: 16px;
-            color: #007bff;
+            color: #237fe0;
             text-decoration: none;
+            font-size: 14px;
+            margin-top: 10px;
         }
 
         .read-more:hover {
-            text-decoration: underline;
+            color: #064385;
         }
 
         .signout {
@@ -191,6 +291,10 @@
             font-size: 14px;
         }
 
+        .grad{
+            background: linear-gradient(to right, #185a9d, #67c7f0);
+        }
+
         @media screen and (max-width: 768px) {
             .container {
                 padding: 0 10px;
@@ -203,28 +307,56 @@
     {% csrf_token %}
     {% if user %}
     <nav class="navbar">
-        <div class="logo"><strong>MindSET Matters</strong></div>
-        <div>
-            <a href="{% url 'question_list' %}" class="create-post-button">Home</a>
-            <a href="/postlist/" class="create-post-button">Blog</a>
+        <div class="logo"><a href="{% url 'homepage' %}"><strong>MindSET Matters</strong></a></div>
+        <div class="navlinks">
+            <a href="{% url 'homepage' %}" class="create-post-button">Home</a>
+            <a href="{% url 'question_list' %}" class="create-post-button">FAQ</a>
+            <a href="{% url 'post_list' %}" class="create-post-button">Blog</a>
             <a href="{% url 'create_post' %}" class="create-post-button">Write Blog</a>
             <a href="/ask/">Ask Question</a>
-
         </div>
-        </div>
-        {% if user.is_authenticated %}
-    <div>
-        <a href="{% url 'user_profile' user.id %}">
-            <!-- <img src="{{ user_data.profile_image.url }}" alt="Profile Image" style="width: 150px; height: 150px; border-radius: 50%;"> -->
-            <strong>{{ user.username|first }}</strong>
-        </a><br>
-    </div>
-    {% endif %}
 
-    </nav>
+        <div class="userprofilelogo">
+          <a href="{% url 'user_profile' user.id %}">
+              <!-- <img src="{{ user_data.profile_image.url }}" alt="Profile Image" style="width: 150px; height: 150px; border-radius: 50%;"> -->
+              <strong>{{ user.username|first }}</strong>
+          </a><br>
+      </div>
+      </nav>
+
+      <main>
+        <div class="main-content m-8">
+          <div class="left-card h-[425px]">
+            <img src="https://images.unsplash.com/photo-1616156027751-fc9a850fdc9b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTI0fHxkaWdpdGFsJTIwbWFya2V0aW5nfGVufDB8fDB8fHww" alt="Oracle Fusion" />
+            <!-- https://images.unsplash.com/photo-1579179858018-6921d9c5f669?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTJ8fHRlY2huaWNhbCUyMGJsb2d8ZW58MHx8MHx8fDA%3D -->
+            <div class="overlay">
+              <h2>Digital Marketing Strategies for Startups – Step by Step</h2>
+              <p>Featured • 4 hours ago</p>
+            </div>
+          </div>
+    
+          <div class="right-cards">
+            <div class="right-card h-[180px]">
+              <img src="https://images.unsplash.com/photo-1564931768730-7e4d8e240044?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHZzJTIwY29kZXxlbnwwfHwwfHx8MA%3D%3D" alt="Oracle Fusion" />
+              <div class="overlay">
+                <h3>VS Code Shortcuts That Save Hours</h3>
+                <p>News • 6 hours ago</p>
+              </div>
+            </div>
+            <div class="right-card h-[180px]">
+              <img src="https://media.istockphoto.com/id/1344939844/photo/hand-holding-drawing-virtual-lightbulb-with-brain-on-bokeh-background-for-creative-and-smart.webp?a=1&b=1&s=612x612&w=0&k=20&c=Q1LGFdFoZQ0YRWTcHtSZpvfJ_DtgD86aMMuUYxPtz8s=" alt="Oracle Fusion" />
+              <div class="overlay">
+                <h3>Explained: Cloud Computing for Beginners</h3>
+                <p>Story • 8 hours ago</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+<!-- 
     <header>
         <p>The place where thoughts become movements.</p>
-    </header>
+    </header> -->
 
     <!-- <form method="get" class="mb-6">
         <label for="category" class="font-semibold text-lg">Filter by Category:</label>
@@ -241,7 +373,7 @@
 
     <!-- we can change this code in  -->
 
-    <div class="mb-6">
+    <!-- <div class="mb-6">
         <span class="font-semibold text-lg">Filter by Category:</span>
         <div class="flex flex-wrap gap-3 mt-2">
             <a href="{% url 'post_list' %}"
@@ -258,35 +390,63 @@
             {% endfor %}
         </div>
     </div>
+ -->
+
+ <div class="mt-16 mb-16 px-16">
+    <span class="text-3xl">Filter By Category</span>
+    <div class="flex flex-wrap gap-3 mt-4">
+        <a href="{% url 'post_list' %}"
+            class="py-3 px-8 rounded-3xl border {% if not selected_category_id %}grad text-white{% else %}bg-gray-300{% endif %}">
+            All
+        </a>
+
+        {% for category in categories %}
+        <a href="{% url 'post_list' %}?category={{ category.id }}"
+            class="py-3 px-8 rounded-full border hover:bg-gray-300 transition duration-300 ease-in-out
+               {% if selected_category_id == category.id %}grad text-white{% else %}bg-gray-300{% endif %}">
+            {{ category.name }}
+        </a>
+        {% endfor %}
+    </div>
+</div>
 
 
 
-    <div class="container">
+    <div class="post-container">
         {% for post in posts %}
-        <div class="post-header">
-            <h1>{{ post.title }}</h1>
-            <small>
-                {{ post.author.username }} | Posted on {{ post.created_at|date:"d-M-Y" }}
-                {% if post.category %}
-                | Category: {{ post.category.name }}
-                {% endif %}
-            </small>
-
-        </div>
-
-        <div class="post-detail">
-            <!-- <img src="{{ post.image_url }}" alt="Post Image"> -->
-            <div>
-                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="w-[20px] h-[400px] rounded-lg " /></a>
+        <div class="post flex">
+            <div class="w-[10%] date-box">
+                <div class="date-line"></div>
+                <p class="date-day">{{ post.created_at|date:"d" }}</p>
+                <p class="date-month-year">{{ post.created_at|date:"M Y" }}</p>
             </div>
-            <p>{{ post.content|slice:":200" }}...</p>
-            <p><a href="{% url 'post_detail' post.pk %}" class="read-more">Read More</a></p>
+            <div class="flex border-b-2 border-blue-600 w-[90%]">
+                <div class="w-[50%] flex justify-center items-center pb-12">
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="h-[200px] w-[250px] object-cover " /></a>
+                </div>
+                <div class="w-[70%] px-4 pb-12 relative">
+                    <p class="text-sm text-gray-600">{{ post.category.name }}</p>
+                    <h1 class="text-lg font-bold mb-1">{{ post.title }}</h1>
+                
+                        
+                        <p class="mt-2 text-gray-700">{{ post.content|slice:":100" }}...</p>
+                        <p class="mt-2"><a href="{% url 'post_detail' post.pk %}" class="read-more">Read More</a></p>
+                        <small class="absolute bottom-12 left-4">
+                            By: {{ post.author.username }} 
+                            | Views: {{post.views_count}}
+                        </small>
+                </div>
+            </div>
         </div>
 
         {% empty %}
-        <p>No posts available.</p>
+        <p class="text-lg ml-16 -mt-8 mb-8">No posts available.</p>
         {% endfor %}
         {% endif %}
+
+        <div class="ads">
+
+        </div>
 
         
     </div>

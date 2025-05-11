@@ -1,133 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MindSET Matters</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0px;
-            padding-left: 50px;
-            padding-right: 50px;
-            padding: 300;
-            background-color: #fdfaf5;
-        }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-            background: #fdfaf5;
-        }
+    <!-- Styles -->
+<style>
+    body{
+        padding: 0px;
+        margin: 0px;
+        font-family: 'Roboto', sans-serif;
+        background-color: #f0efed;
+    }
 
-        .navbar a {
-            text-decoration: none;
-            color: black;
-            margin: 10px 15px;
-            font-size: 20px;
-        }
+    .main{
+        border: 1.4px solid #34aae9;
+        width: 60%;
+        margin: 80px 220px;
+        padding: 10px 20px;
+    }
 
-        .navbar .cta {
-            background: black;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-        }
-        .draft-text {
-            color: #777;
-            font-size: 16px;
-        }
-        .publish-btn {
-            background-color: #1e1e1e;
-            color: #fff;
-            border: none;
-            padding: 15px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        .editor-container {
-            max-width: 800px;
-            max-height: 500px;
-            margin: 40px auto;
-        }
-        .title-input {
-            font-size: 36px;
-            font-weight: bold;
-            border: none;
-            width: 100%;
-            outline: none;
-            color: #444;
-            background-color: transparent;
-        }
-        .story-input {
-            font-size: 20px;
-            border: none;
-            width: 100%;
-            outline: none;
-            color: #999;
-            background-color: transparent;
-            margin-top: 10px;
-        }
-        .plus-icon {
-            font-size: 24px;
-            color: #999;
-            cursor: pointer;
-            margin-right: 10px;
-        }
-        p a{
-            text-decoration: none;
-            color: #000;
-            margin-left: 90%;
-        }
-        .signout {
-            background: black;
-            color: white;
-            height: 27px;
-            border-radius: 15px;
-            width: 100px;
-        }
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top:0px;
+        z-index: 1000;
+        padding: 20px 50px;
+        background: linear-gradient(to right, #185a9d, #67c7f0);
+        /* background: linear-gradient(to right, #34aae9, #0072ff); */
+    }
 
-        .signout a {
-            text-decoration: none;
-            color: white;
-            font-size: large;
-            font-weight: 100;
-            margin: 15px;
-        }
-    </style>
+    .navbar a {
+        text-decoration: none;
+        color: white;
+        margin: 10px 15px;
+        font-size: 20px;
+        font-weight: 500;
+        padding-bottom: 5px;
+    }
+
+    .navbar .navlinks a:hover{
+        border-bottom: 3px solid white;
+    }
+
+    .navbar .cta {
+        background: black;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+    }
+
+    .userprofilelogo{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
+        border: 3px solid rgb(91, 89, 89);
+        text-transform: uppercase;
+    }
+
+    .userprofilelogo a{
+        margin-top: 18px;
+        color: #000;
+    }
+
+    .tab-nav {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1.4px solid #34aae9;
+    }
+
+    .tab-button {
+        all: unset; 
+        padding: 10px 140px;
+        color: #333;
+        cursor: pointer;
+        font-size: 17px;
+    }
+
+    .tab-button.active {
+        position: relative;
+        top:4px;
+        border-bottom: 3px solid #0072ff;
+    }
+
+    .forms-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .form-section {
+        padding: 30px;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .form-heading {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #333;
+    }
+
+    .editor-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .title-input,
+    .story-input {
+        font-size: 16px;
+        padding: 10px;
+        border: 1.4px solid #34aae9;
+        color:#999;
+        width: 100%;
+        background: #fdfaf5;
+    }
+
+    .title-input:focus{
+        outline: none;
+    }
+
+    .story-input:focus{
+        outline: none;
+    }
+
+    .story-input {
+        height: 130px;
+        resize: vertical;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .form-label {
+        width: 96%;
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+        color:#999;
+        border: 1.4px solid #34aae9;
+        padding: 20px;
+    }
+
+    .button-container {
+        text-align: center;
+    }
+
+    .publish-btn {
+        width: 120px;
+        border-radius: 5px;
+        padding: 8px 12px;
+        border: 2px solid #ccc;
+        background-color: #f6f3f3;
+        color: #333;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+    .publish-btn:hover {
+        background: #0072ff;
+        color: white;
+        transition: all 0.3s ease-in-out;
+    }
+</style>
 </head>
-
 <body>
     <nav class="navbar">
-        <div class="logo"><strong>MindSET Matters</strong></div>
-        <div>
-            <a href="{% url 'question_list' %}" class="create-post-button">Home</a>
-            <a href="/postlist/" class="create-post-button">Blog</a>
+        <div class="logo"><a href="{% url 'homepage' %}"><strong>MindSET Matters</strong></a></div>
+        <div class="navlinks">
+            <a href="{% url 'homepage' %}" class="create-post-button">Home</a>
+            <a href="{% url 'question_list' %}" class="create-post-button">FAQ</a>
+            <a href="{% url 'post_list' %}" class="create-post-button">Blog</a>
             <a href="{% url 'create_post' %}" class="create-post-button">Write Blog</a>
             <a href="/ask/">Ask Question</a>
-            
-            
         </div>
-        <div>
-            <a href="{% url 'user_profile' user.id %}">
-                <!-- <img src="{{ user_data.profile_image.url }}" alt="Profile Image" style="width: 150px; height: 150px; border-radius: 50%;"> -->
-                <strong>{{ user.username|first }}</strong>
-            </a><br>
-        </div>
-    </nav>
-   
-    <form method="POST">
+
+        <div class="userprofilelogo">
+          <a href="{% url 'user_profile' user.id %}">
+              <!-- <img src="{{ user_data.profile_image.url }}" alt="Profile Image" style="width: 150px; height: 150px; border-radius: 50%;"> -->
+              <strong>{{ user.username|first }}</strong>
+          </a><br>
+      </div>
+      </nav>
+
+    <!-- Navigation -->
+     <div class="main">
+<div class="tab-nav">
+    <button class="tab-button active" onclick="showForm('story-form')">Create Blog</button>
+    <button class="tab-button" onclick="showForm('question-form')">Add Question</button>
+</div>
+
+<!-- Error Message -->
+{% if error_message %}
+    <div class="error-message">{{ error_message }}</div>
+{% endif %}
+
+<!-- Forms Container -->
+<div class="forms-wrapper">
+    <!-- Add Story Form -->
+    <form id="story-form" method="POST" enctype="multipart/form-data" class="form-section">
         {% csrf_token %}
-        
-        
         <div class="editor-container">
-            <input type="text" id="title" name="title" class="title-input" placeholder="Question Title" required value="{{ form.title.value|default_if_none:'' }}">
+            <input type="text" name="title" class="title-input" placeholder="Enter Title" required
+                value="{{ form.title.value|default_if_none:'' }}">
+
+            <div style="margin-top: 20px; font-family: Arial, sans-serif; font-size: 18px; color:#999;">
+                <label for="category" style="margin-right: 10px;">Select Category:</label>
+                {{ form.category }}
+            </div>
+
+            <textarea name="content" class="story-input" placeholder="Tell your story..." required>{{ form.content.value|default_if_none:'' }}</textarea>
+
+            <div class="form-label">
+                <label style="font-size: 17px;" for="image">Upload Image:</label>
+                <input type="file" style="font-size: 17px;" name="image" accept="image/*">
+            </div>
+
+            <div class="button-container">
+                <button class="publish-btn" type="submit">Publish</button>
+            </div>
         </div>
-        <button class="publish-btn mt-16 sm:ml-[400px] md:ml-[600px] lg:ml-[950px] md:mt-[100px]" type="submit">Submit</button>
-        
     </form>
+
+    <!-- Ask Question Form -->
+    <form id="question-form" method="POST" class="form-section" style="display: none;">
+        {% csrf_token %}
+        <div class="editor-container">
+            <input type="text" name="title" class="title-input" placeholder="Question Title"
+                required value="{{ form.title.value|default_if_none:'' }}">
+            <!-- <input type="text" name="title" class="title-input" placeholder="Add Keywords"
+                required value="{{ form.title.value|default_if_none:'' }}"> -->
+            <!-- <textarea name="content" class="story-input" placeholder="Short Description (optional)" required>{{ form.content.value|default_if_none:'' }}</textarea>
+            <div>
+                <div>
+            <label style="margin-top: 10px;margin-left: 35px; font-family: Arial, sans-serif; font-size: 17px; color:#999;">Post Anonymously</label>
+            <input type="checkbox" name="title" class="title-input" style="position: relative;bottom:40px;right: 245px;">
+            </div>-->
+            <div class="button-container">
+                <button class="publish-btn" type="submit">Publish</button>
+            </div>
+            
+        </div>
+    </form>
+</div>
+</div>
+
+
+<!-- JavaScript -->
+<script>
+    function showForm(formId) {
+        const storyForm = document.getElementById("story-form");
+        const questionForm = document.getElementById("question-form");
+        const buttons = document.querySelectorAll(".tab-button");
+
+        if (formId === "story-form") {
+            storyForm.style.display = "block";
+            questionForm.style.display = "none";
+        } else {
+            storyForm.style.display = "none";
+            questionForm.style.display = "block";
+        }
+
+        buttons.forEach(btn => btn.classList.remove("active"));
+        document.querySelector(`.tab-button[onclick="showForm('${formId}')"]`).classList.add("active");
+    }
+</script>
+
 </body>
+</html>

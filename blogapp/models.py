@@ -27,6 +27,7 @@ class Post(models.Model):
     author = models.ForeignKey(User,on_delete=models.CASCADE,default='1')
     image = models.ImageField(upload_to='images/',default='default.jpg')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    views_count = models.IntegerField(default=0)
     
 
     def __str__(self):
